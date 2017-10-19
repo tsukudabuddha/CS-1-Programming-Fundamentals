@@ -51,12 +51,12 @@ class Logger(object):
     '''
 
     def __init__(self, file_name):
-        # TODO:  Finish this initialization method.  The file_name passed should be the
-        # full file name of the file that the logs will be written to.
-        self.file_name = None
+        """Initialize logger with file_name as the file name."""
+        self.file_name = file_name
 
     def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate,
                        basic_repro_num):
+        """Write metadata to file."""
         # TODO: Finish this method.  The simulation class should use this method
         # immediately upon creation, to log the specific parameters of the simulation
         # as the first line of the file.  This line of metadata should be tab-delimited

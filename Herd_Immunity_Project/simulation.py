@@ -1,7 +1,11 @@
-import random, sys
-random.seed(42)
+"""Simulation Script."""
+import random
+import sys
 from person import Person
 from logger import Logger
+
+random.seed(42)
+
 
 class Simulation(object):
     '''
@@ -71,6 +75,7 @@ class Simulation(object):
 
     def __init__(self, population_size, vacc_percentage, virus_name,
                  mortality_rate, basic_repro_num, initial_infected=1):
+        """Initialize simulation."""
         self.population_size = population_size
         self.population = []
         self.total_infected = 0
@@ -143,13 +148,13 @@ class Simulation(object):
         # the logger's log_time_step() method at the end of each time step, pass in the
         # time_step_counter variable!
         time_step_counter = 0
-        # TODO: Remember to set this variable to an intial call of
-        # self._simulation_should_continue()!
-        should_continue = None
+
+        should_continue = self.simulation_should_continue()
         while should_continue:
         # TODO: for every iteration of this loop, call self.time_step() to compute another
         # round of this simulation.  At the end of each iteration of this loop, remember
         # to rebind should_continue to another call of self._simulation_should_continue()!
+            should_continue = self.simulation_should_continue()
             pass
         print('The simulation has ended after {time_step_counter} turns.'.format(time_step_counter))
 
@@ -172,7 +177,7 @@ class Simulation(object):
         # people are selected for an interaction.  That means that only living people
         # should be passed into this method.  Assert statements are included to make sure
         # that this doesn't happen.
-        assert person1.is_alive == True
+        assert person.is_alive == True
         assert random_person.is_alive == True
 
         # The possible cases you'll need to cover are listed below:
@@ -199,17 +204,17 @@ class Simulation(object):
         # NOTE: Once you have iterated through the entire list of self.newly_infected, remember
         # to reset self.newly_infected back to an empty list!
 
-if __name__ == "__main__":
-    params = sys.argv[1:]
-    pop_size = int(params[0])
-    vacc_percentage = float(params[1])
-    virus_name = str(params[2])
-    mortality_rate = float(params[3])
-    basic_repro_num = float(params[4])
-    if len(params) == 6:
-        initial_infected = int(params[5])
-    else:
-        initial_infected = 1
-    simulation = Simulation(pop_size, vacc_percentage, virus_name, mortality_rate,
-                            basic_repro_num, initial_infected)
-    simulation.run()
+        if __name__ == "__main__":
+            params = sys.argv[1:]
+            pop_size = int(params[0])
+            vacc_percentage = float(params[1])
+            virus_name = str(params[2])
+            mortality_rate = float(params[3])
+            basic_repro_num = float(params[4])
+            if len(params) == 6:
+                initial_infected = int(params[5])
+            else:
+                initial_infected = 1
+            simulation = Simulation(pop_size, vacc_percentage, virus_name, mortality_rate,
+                                    basic_repro_num, initial_infected)
+            simulation.run()
