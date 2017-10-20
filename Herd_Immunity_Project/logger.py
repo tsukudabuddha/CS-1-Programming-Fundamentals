@@ -57,29 +57,35 @@ class Logger(object):
     def write_metadata(self, pop_size, vacc_percentage, virus_name,
                        mortality_rate, basic_repro_num):
         """Write metadata to file."""
+        # Create an array of the parameters
         parameters = [pop_size, vacc_percentage, virus_name, mortality_rate,
                       basic_repro_num]
+        # Create a string to add all the parameters to
         parameter_string = ""
+        # Add each parameter output string
         for param in parameters:
             parameter_string += (str(param) + "\t")
 
+        # Create file and write first line
         with open(self.file_name, "w") as f:
             f.write(parameter_string + "\n")
 
     def log_interaction(self, person1, person2, did_infect=None,
                         person2_vacc=None, person2_sick=None):
         """Log interactions between infected person and random person."""
-        print("Person for log id: %s" % person1._id)
-        print("Random for log id: %s" % person2._id)
+        # Open file in the append mode
         with open(self.file_name, "a") as f:
+            # Check if the interaciton ended in infection or not.
+            # If not, check why
             if did_infect:
-                f.write(str(person1._id) + " infects " + str(person2._id) + "\n")
+                f.write(str(person1._id) + " infects " + str(person2._id)
+                        + "\n")
             elif person2_sick:
-                f.write(str(person1._id) + " didn't infect " + str(person2._id) +
-                        " because they were already sick\n")
+                f.write(str(person1._id) + " didn't infect " + str(person2._id)
+                        + " because they were already sick\n")
             elif person2_vacc:
-                f.write(str(person1._id) + " didn't infect " + str(person2._id) +
-                        " because they were vaccinated\n")
+                f.write(str(person1._id) + " didn't infect " + str(person2._id)
+                        + " because they were vaccinated\n")
 
     def log_infection_survival(self, person, did_die_from_infection):
         """Log whether or not the person died."""

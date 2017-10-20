@@ -51,7 +51,10 @@ class Person(object):
 
     def did_survive_infection(self, mortality_rate):
         """Check if person is still alive."""
+        # Generate random number
         death_roll = r.random()
+
+        # Compare against mortality_rate to determine outcome
         if death_roll < mortality_rate:
             self.is_alive = False
             self.infected = False
