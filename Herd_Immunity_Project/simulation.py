@@ -115,7 +115,7 @@ class Simulation(object):
         non_vacc_count = 0
         while len(population) != self.population_size:
             id_number = len(population)
-            if infected_count != initial_infected:
+            if infected_count < initial_infected:
                 population.append(Person(id_number, False, True))
                 infected_count += 1
             else:
@@ -140,7 +140,6 @@ class Simulation(object):
                 else:
                     should_end = True
 
-        print(not should_end)
         return not should_end  # Checking if should continue so reverse
 
     def run(self):
