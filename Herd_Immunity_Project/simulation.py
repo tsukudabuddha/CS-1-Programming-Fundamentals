@@ -147,7 +147,7 @@ class Simulation(object):
         self.time_step_counter = 0
 
         should_continue = self._simulation_should_continue()
-        print(should_continue)
+
         while should_continue:
             self.time_step_counter += 1
             self.time_step()
@@ -156,11 +156,6 @@ class Simulation(object):
 
         print("The simulation has ended after " + str(self.time_step_counter) +
               " turns.")
-        infected_count = 0
-        for person in self.population:
-            if person.infected:
-                infected_count += 1
-        print("Infected count: %i" % infected_count)
 
     def infected_helper(self, person, alive_list):
         """Validate person."""
